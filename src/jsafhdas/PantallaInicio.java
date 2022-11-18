@@ -19,6 +19,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.JTabbedPane;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 
 public class PantallaInicio {
 	public static String usuario;
@@ -105,7 +108,7 @@ public class PantallaInicio {
 					PantallaInicio window = new PantallaInicio();
 					window.frmInicio.setVisible(true);
 				} catch (Exception e) {
-					e.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
 				}
 			}
 		});
@@ -119,6 +122,7 @@ public class PantallaInicio {
 		conection con = new conection();
 
 		con.conectar();
+		
 	}
 
 	/**
@@ -126,120 +130,123 @@ public class PantallaInicio {
 	 */
 	private void initialize() {
 		frmInicio = new JFrame();
+		frmInicio.setResizable(false);
+		frmInicio.setAutoRequestFocus(false);
+		frmInicio.setAlwaysOnTop(true);
 		frmInicio.setTitle("PANTALLA DE INICIO");
-		frmInicio.setBounds(100, 100, 795, 372);
+		frmInicio.setBounds(100, 100, 508, 308);
 		frmInicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmInicio.getContentPane().setLayout(null);
-
-		JLabel lblReportarDanos = new JLabel("Reportar da\u00F1os");
-		lblReportarDanos.setFont(new Font("Yu Gothic Medium", Font.BOLD | Font.ITALIC, 24));
-		lblReportarDanos.setBounds(49, 38, 241, 42);
-		frmInicio.getContentPane().add(lblReportarDanos);
-
-		JLabel lblAdministrador = new JLabel("Administrador");
-		lblAdministrador.setFont(new Font("Yu Gothic Medium", Font.BOLD | Font.ITALIC, 24));
-		lblAdministrador.setBounds(515, 38, 241, 42);
-		frmInicio.getContentPane().add(lblAdministrador);
-
-		JButton btnIniciarSesion = new JButton("Iniciar Sesi\u00F3n");
-		btnIniciarSesion.setBackground(Color.ORANGE);
-		btnIniciarSesion.setForeground(new Color(0, 0, 0));
-		btnIniciarSesion.setFont(new Font("Sylfaen", Font.BOLD | Font.ITALIC, 18));
-		btnIniciarSesion.setBounds(36, 233, 189, 33);
-		frmInicio.getContentPane().add(btnIniciarSesion);
-		btnIniciarSesion.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (!txtUsuario.getText().isEmpty() && !psContrasena.getText().isEmpty()) {
-					valid();
-
-				} else {
-					JOptionPane.showMessageDialog(null, "Debes llenas todos los campos");
-				}
-
-			}
-		});
-
-		JButton btnRegistrar = new JButton("Registrar");
-		btnRegistrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frmInicio.setVisible(false);
-				ru.frmRegistroDeUsuario.setVisible(true);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(0, 11, 509, 337);
+		frmInicio.getContentPane().add(tabbedPane);
+		
+		JLayeredPane layeredPane = new JLayeredPane();
+		tabbedPane.addTab("Reportar daño", null, layeredPane, null);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(216, 191, 216));
+		panel.setBounds(0, 0, 503, 309);
+		layeredPane.add(panel);
+		panel.setLayout(null);
+		
+				JLabel lblUsuario = new JLabel("Usuario");
+				lblUsuario.setBounds(56, 11, 88, 42);
+				panel.add(lblUsuario);
+				lblUsuario.setFont(new Font("Century Schoolbook", Font.BOLD, 21));
 				
-			}
-		});
-		btnRegistrar.addMouseListener(new MouseAdapter() {		
-		});
-		btnRegistrar.setBackground(Color.GREEN);
-		btnRegistrar.setFont(new Font("Sylfaen", Font.BOLD | Font.ITALIC, 18));
-		btnRegistrar.setBounds(455, 277, 189, 33);
-		frmInicio.getContentPane().add(btnRegistrar);
+						JLabel lblContrasena = new JLabel("Contrase\u00F1a");
+						lblContrasena.setBounds(298, 11, 146, 42);
+						panel.add(lblContrasena);
+						lblContrasena.setFont(new Font("Century Schoolbook", Font.BOLD, 21));
+						
+								txtUsuario = new JTextField();
+								txtUsuario.setFont(new Font("Century Schoolbook", Font.BOLD, 18));
+								txtUsuario.setBounds(20, 48, 153, 20);
+								panel.add(txtUsuario);
+								txtUsuario.setColumns(10);
+								
+										psContrasena = new JPasswordField();
+										psContrasena.setBounds(255, 48, 212, 20);
+										panel.add(psContrasena);
+										
+												JButton btnIniciarSesion = new JButton("Iniciar Sesi\u00F3n");
+												btnIniciarSesion.setBounds(27, 120, 146, 33);
+												panel.add(btnIniciarSesion);
+												btnIniciarSesion.setBackground(Color.ORANGE);
+												btnIniciarSesion.setForeground(new Color(0, 0, 0));
+												btnIniciarSesion.setFont(new Font("Sylfaen", Font.BOLD | Font.ITALIC, 18));
+												
+												JButton btnRegistrar = new JButton("Registrar");
+												btnRegistrar.setBounds(255, 120, 153, 33);
+												panel.add(btnRegistrar);
+												btnRegistrar.setFont(new Font("Sylfaen", Font.BOLD | Font.ITALIC, 18));
+												btnRegistrar.setBackground(Color.GREEN);
+												btnIniciarSesion.addActionListener(new ActionListener() {
+													public void actionPerformed(ActionEvent e) {
+														if (!txtUsuario.getText().isEmpty() && !psContrasena.getText().isEmpty()) {
+															valid();
 
-		btnRegistrar.setBackground(Color.GREEN);
-		btnRegistrar.setFont(new Font("Sylfaen", Font.BOLD | Font.ITALIC, 18));
-		btnRegistrar.setBounds(36, 277, 189, 33);
-		frmInicio.getContentPane().add(btnRegistrar);
+														} else {
+															JOptionPane.showMessageDialog(null, "Debes llenas todos los campos");
+														}
 
-		JLabel lblUsuario = new JLabel("Usuario");
-		lblUsuario.setFont(new Font("Yu Gothic Medium", Font.BOLD | Font.ITALIC, 19));
-		lblUsuario.setBounds(10, 107, 88, 42);
-		frmInicio.getContentPane().add(lblUsuario);
-
-		JLabel lblContrasena = new JLabel("Contrase\u00F1a");
-		lblContrasena.setFont(new Font("Yu Gothic Medium", Font.BOLD | Font.ITALIC, 19));
-		lblContrasena.setBounds(10, 160, 122, 42);
-		frmInicio.getContentPane().add(lblContrasena);
-
-		txtUsuario = new JTextField();
-		txtUsuario.setBounds(138, 116, 213, 20);
-		frmInicio.getContentPane().add(txtUsuario);
-		txtUsuario.setColumns(10);
-
-		psContrasena = new JPasswordField();
-		psContrasena.setBounds(139, 169, 212, 20);
-		frmInicio.getContentPane().add(psContrasena);
-
-		JLabel lblUsuarioAdmin = new JLabel("Usuario");
-		lblUsuarioAdmin.setFont(new Font("Yu Gothic Medium", Font.BOLD | Font.ITALIC, 19));
-		lblUsuarioAdmin.setBounds(455, 107, 88, 42);
-		frmInicio.getContentPane().add(lblUsuarioAdmin);
-
-		JLabel lblContrasenaAdmin = new JLabel("Contrase\u00F1a");
-		lblContrasenaAdmin.setFont(new Font("Yu Gothic Medium", Font.BOLD | Font.ITALIC, 19));
-		lblContrasenaAdmin.setBounds(455, 160, 122, 42);
-		frmInicio.getContentPane().add(lblContrasenaAdmin);
-
-		txtUsuarioAdmin = new JTextField();
-		txtUsuarioAdmin.setColumns(10);
-		txtUsuarioAdmin.setBounds(590, 116, 179, 20);
-		frmInicio.getContentPane().add(txtUsuarioAdmin);
-
-		psContrasenaAdmin = new JPasswordField();
-		psContrasenaAdmin.setBounds(590, 169, 179, 20);
-		frmInicio.getContentPane().add(psContrasenaAdmin);
-
-		JButton btnIniciarSesionAdmin = new JButton("Iniciar Sesi\u00F3n");
-		btnIniciarSesionAdmin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnIniciarSesionAdmin.setForeground(Color.BLACK);
-		btnIniciarSesionAdmin.setFont(new Font("Sylfaen", Font.BOLD | Font.ITALIC, 18));
-		btnIniciarSesionAdmin.setBackground(Color.ORANGE);
-		btnIniciarSesionAdmin.setBounds(455, 233, 189, 33);
-		frmInicio.getContentPane().add(btnIniciarSesionAdmin);
-
-		JButton btnRegistrarAdmin = new JButton("Registrar");
-		btnRegistrarAdmin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				RegistrarAdmin ra = new RegistrarAdmin();
-				ra.frmRegistroDeAdmin.setVisible(true);
-				frmInicio.setVisible(false);
-			}
-		});
-		btnRegistrarAdmin.setFont(new Font("Sylfaen", Font.BOLD | Font.ITALIC, 18));
-		btnRegistrarAdmin.setBackground(Color.GREEN);
-		btnRegistrarAdmin.setBounds(455, 280, 189, 33);
-		frmInicio.getContentPane().add(btnRegistrarAdmin);
+													}
+												});
+		
+		JLayeredPane layeredPane_1 = new JLayeredPane();
+		tabbedPane.addTab("Administrador", null, layeredPane_1, null);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(135, 206, 250));
+		panel_1.setBounds(0, 0, 504, 309);
+		layeredPane_1.add(panel_1);
+				panel_1.setLayout(null);
+		
+				JLabel lblUsuarioAdmin = new JLabel("Usuario");
+				lblUsuarioAdmin.setBounds(56, 11, 88, 42);
+				panel_1.add(lblUsuarioAdmin);
+				lblUsuarioAdmin.setFont(new Font("Century Schoolbook", Font.BOLD, 21));
+				
+						txtUsuarioAdmin = new JTextField();
+						txtUsuarioAdmin.setFont(new Font("Century Schoolbook", Font.BOLD, 18));
+						txtUsuarioAdmin.setBounds(20, 48, 153, 20);
+						panel_1.add(txtUsuarioAdmin);
+						txtUsuarioAdmin.setColumns(10);
+						
+								JLabel lblContrasenaAdmin = new JLabel("Contrase\u00F1a");
+								lblContrasenaAdmin.setBounds(298, 11, 146, 42);
+								panel_1.add(lblContrasenaAdmin);
+								lblContrasenaAdmin.setFont(new Font("Century Schoolbook", Font.BOLD, 21));
+								
+										psContrasenaAdmin = new JPasswordField();
+										psContrasenaAdmin.setBounds(255, 48, 212, 20);
+										panel_1.add(psContrasenaAdmin);
+										
+												JButton btnIniciarSesionAdmin = new JButton("Iniciar Sesi\u00F3n");
+												btnIniciarSesionAdmin.setBounds(20, 131, 145, 33);
+												panel_1.add(btnIniciarSesionAdmin);
+												btnIniciarSesionAdmin.addActionListener(new ActionListener() {
+													public void actionPerformed(ActionEvent e) {
+													}
+												});
+												btnIniciarSesionAdmin.setForeground(Color.BLACK);
+												btnIniciarSesionAdmin.setFont(new Font("Sylfaen", Font.BOLD | Font.ITALIC, 18));
+												btnIniciarSesionAdmin.setBackground(Color.ORANGE);
+												
+														JButton btnRegistrarAdmin = new JButton("Registrar");
+														btnRegistrarAdmin.setBounds(259, 131, 136, 33);
+														panel_1.add(btnRegistrarAdmin);
+														btnRegistrarAdmin.addActionListener(new ActionListener() {
+															public void actionPerformed(ActionEvent e) {
+																RegistrarAdmin ra = new RegistrarAdmin();
+																ra.frmRegistroDeAdmin.setVisible(true);
+																frmInicio.setVisible(false);
+															}
+														});
+														btnRegistrarAdmin.setFont(new Font("Sylfaen", Font.BOLD | Font.ITALIC, 18));
+														btnRegistrarAdmin.setBackground(Color.GREEN);
 	}
 
 	RegisterUser rus = new RegisterUser();
@@ -274,5 +281,18 @@ public class PantallaInicio {
 		}
 
 		return validar;
+	}
+	public void camp() {
+		if(!txtUsuario.getText().isEmpty() || !psContrasena.getText().isEmpty()) {
+			txtUsuarioAdmin.setText("");
+			psContrasenaAdmin.setText("");
+			
+		}
+		
+		if(!txtUsuarioAdmin.getText().isEmpty() || !psContrasenaAdmin.getText().isEmpty() ) {
+			txtUsuario.setText("");
+			psContrasena.setText("");
+		}
+		
 	}
 }

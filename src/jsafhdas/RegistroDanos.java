@@ -212,6 +212,8 @@ public class RegistroDanos {
 				pi.getFrmInicio().setVisible(true);
 			}
 		});
+		
+		
 		btnCerrarSesion.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 16));
 		btnCerrarSesion.setBounds(539, 305, 172, 34);
 		frmRegistroDeDanos.getContentPane().add(btnCerrarSesion);

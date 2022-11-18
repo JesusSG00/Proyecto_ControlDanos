@@ -14,6 +14,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Color;
+import javax.swing.JPanel;
+import java.awt.SystemColor;
 
 public class RegisterUser {
 	public static String usuario;
@@ -60,7 +62,6 @@ public class RegisterUser {
 	}
 
 	JFrame frmRegistroDeUsuario;
-	private JTextField txtUsuario;
 
 	/**
 	 * Launch the application.
@@ -91,70 +92,63 @@ public class RegisterUser {
 	 */
 	private void initialize() {
 		frmRegistroDeUsuario = new JFrame();
+		frmRegistroDeUsuario.setAlwaysOnTop(true);
 		frmRegistroDeUsuario.setTitle("Registro de Usuario");
-		frmRegistroDeUsuario.setBounds(100, 100, 590, 282);
+		frmRegistroDeUsuario.setBounds(100, 100, 386, 245);
 		frmRegistroDeUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmRegistroDeUsuario.getContentPane().setLayout(null);
-
-		JButton btnNewButton = new JButton("Registrar");
-		btnNewButton.setBackground(Color.ORANGE);
-		btnNewButton.setFont(new Font("Calisto MT", Font.BOLD | Font.ITALIC, 16));
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if (!txtUsuario.getText().isEmpty() && !txtContrase.getText().isEmpty()) {
-					registrar();
-					frmRegistroDeUsuario.setVisible(false);
-				} else {
-					JOptionPane.showMessageDialog(null, "Debes llenas todos los campos");
-				}
-
-			}
-		});
-
-		btnNewButton.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				frmRegistroDeUsuario.setVisible(false);
-			}
-		});
-		btnNewButton.setBounds(70, 142, 123, 29);
-		frmRegistroDeUsuario.getContentPane().add(btnNewButton);
-
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(216, 191, 216));
+		panel.setBounds(0, 0, 382, 464);
+		frmRegistroDeUsuario.getContentPane().add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Usuario");
+		lblNewLabel.setBounds(10, 31, 121, 20);
+		lblNewLabel.setFont(new Font("Century Schoolbook", Font.BOLD, 16));
+		panel.add(lblNewLabel);
+		
+		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
+		lblContrasea.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 16));
+		lblContrasea.setBounds(10, 95, 123, 29);
+		panel.add(lblContrasea);
+		
 		txtUsuario = new JTextField();
-		txtUsuario.setBounds(236, 11, 215, 29);
-		frmRegistroDeUsuario.getContentPane().add(txtUsuario);
+		txtUsuario.setFont(new Font("Century Schoolbook", Font.BOLD, 15));
+		txtUsuario.setBackground(new Color(250, 235, 215));
 		txtUsuario.setColumns(10);
-
+		txtUsuario.setBounds(98, 29, 249, 29);
+		panel.add(txtUsuario);
+		
+		txtContrase = new JPasswordField();
+		txtContrase.setBackground(new Color(250, 235, 215));
+		txtContrase.setBounds(120, 97, 227, 29);
+		panel.add(txtContrase);
+		
+		JButton btnNewButton = new JButton("Registrar");
+		btnNewButton.setFont(new Font("Calisto MT", Font.BOLD | Font.ITALIC, 16));
+		btnNewButton.setBackground(Color.ORANGE);
+		btnNewButton.setBounds(20, 164, 123, 29);
+		panel.add(btnNewButton);
+		
 		JButton btnCerrar = new JButton("Cerrar");
 		btnCerrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				frmRegistroDeUsuario.setVisible(false);
-				PantallaInicio pi = new PantallaInicio();
-				pi.frmInicio.setVisible(true);
+			PantallaInicio pi = new PantallaInicio();
+			pi.frmInicio.setVisible(true);
+			frmRegistroDeUsuario.setVisible(false);
 			}
 		});
-		btnCerrar.setBackground(Color.MAGENTA);
 		btnCerrar.setFont(new Font("Calisto MT", Font.BOLD | Font.ITALIC, 16));
-		btnCerrar.setBounds(285, 144, 123, 29);
-		frmRegistroDeUsuario.getContentPane().add(btnCerrar);
-
-		JLabel lblNewLabel = new JLabel("Usuario");
-		lblNewLabel.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 16));
-		lblNewLabel.setBounds(70, 11, 123, 29);
-		frmRegistroDeUsuario.getContentPane().add(lblNewLabel);
-
-		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
-		lblContrasea.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 16));
-		lblContrasea.setBounds(70, 61, 123, 29);
-		frmRegistroDeUsuario.getContentPane().add(lblContrasea);
-
-		txtContrase = new JPasswordField();
-		txtContrase.setBounds(236, 67, 215, 23);
-		frmRegistroDeUsuario.getContentPane().add(txtContrase);
+		btnCerrar.setBackground(Color.MAGENTA);
+		btnCerrar.setBounds(168, 164, 123, 29);
+		panel.add(btnCerrar);
 
 	}
 
 	conection conec = new conection();
+	private JTextField txtUsuario;
 	private JPasswordField txtContrase;
 
 	public boolean registrar() {
@@ -170,5 +164,4 @@ public class RegisterUser {
 
 		return registrado;
 	}
-
 }

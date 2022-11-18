@@ -105,6 +105,7 @@ public class RegistrarAdmin {
 	 */
 	private void initialize() {
 		frmRegistroDeAdmin = new JFrame();
+		frmRegistroDeAdmin.setAlwaysOnTop(true);
 		frmRegistroDeAdmin.setTitle("Registro de Admin");
 		frmRegistroDeAdmin.setBounds(100, 100, 576, 323);
 		frmRegistroDeAdmin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
