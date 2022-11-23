@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import javax.swing.JPanel;
 
 public class RegistrarAdmin {
 	public static String usuario;
@@ -97,7 +98,7 @@ public class RegistrarAdmin {
 	 */
 	public RegistrarAdmin() {
 		initialize();
-		
+
 	}
 
 	/**
@@ -107,45 +108,67 @@ public class RegistrarAdmin {
 		frmRegistroDeAdmin = new JFrame();
 		frmRegistroDeAdmin.setAlwaysOnTop(true);
 		frmRegistroDeAdmin.setTitle("Registro de Admin");
-		frmRegistroDeAdmin.setBounds(100, 100, 576, 323);
+		frmRegistroDeAdmin.setBounds(100, 100, 589, 296);
 		frmRegistroDeAdmin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmRegistroDeAdmin.getContentPane().setLayout(null);
 
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 153, 153));
+		panel.setBounds(0, 0, 581, 265);
+		frmRegistroDeAdmin.getContentPane().add(panel);
+		panel.setLayout(null);
+
 		JLabel lblNewLabel = new JLabel("Usuario");
-		lblNewLabel.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 16));
-		lblNewLabel.setBounds(51, 11, 123, 29);
-		frmRegistroDeAdmin.getContentPane().add(lblNewLabel);
+		lblNewLabel.setBounds(10, 11, 123, 29);
+		panel.add(lblNewLabel);
+		lblNewLabel.setFont(new Font("Century Schoolbook", Font.BOLD, 21));
 
 		txtUsuario = new JTextField();
+		txtUsuario.setFont(new Font("Century Schoolbook", Font.BOLD, 21));
+		txtUsuario.setBounds(10, 35, 215, 23);
+		panel.add(txtUsuario);
 		txtUsuario.setColumns(10);
-		txtUsuario.setBounds(51, 34, 215, 23);
-		frmRegistroDeAdmin.getContentPane().add(txtUsuario);
-
-		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
-		lblContrasea.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 16));
-		lblContrasea.setBounds(320, 11, 123, 29);
-		frmRegistroDeAdmin.getContentPane().add(lblContrasea);
-
-		txtContrasena = new JPasswordField();
-		txtContrasena.setBounds(311, 34, 215, 23);
-		frmRegistroDeAdmin.getContentPane().add(txtContrasena);
 
 		JLabel lblCorreo = new JLabel("Correo");
-		lblCorreo.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 16));
-		lblCorreo.setBounds(51, 68, 123, 29);
-		frmRegistroDeAdmin.getContentPane().add(lblCorreo);
+		lblCorreo.setBounds(10, 69, 123, 29);
+		panel.add(lblCorreo);
+		lblCorreo.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 21));
 
 		txtCorreo = new JTextField();
+		txtCorreo.setFont(new Font("Century Schoolbook", Font.BOLD, 21));
+		txtCorreo.setBounds(10, 94, 215, 23);
+		panel.add(txtCorreo);
 		txtCorreo.setColumns(10);
-		txtCorreo.setBounds(51, 108, 215, 23);
-		frmRegistroDeAdmin.getContentPane().add(txtCorreo);
+
+		JLabel lblCodigoDeAcceso = new JLabel("Codigo de acceso");
+		lblCodigoDeAcceso.setBounds(10, 134, 190, 29);
+		panel.add(lblCodigoDeAcceso);
+		lblCodigoDeAcceso.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 21));
+
+		txtCodigoAcceso = new JTextField();
+		txtCodigoAcceso.setFont(new Font("Century Schoolbook", Font.BOLD, 21));
+		txtCodigoAcceso.setBounds(10, 174, 215, 23);
+		panel.add(txtCodigoAcceso);
+		txtCodigoAcceso.setColumns(10);
+
+		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
+		lblContrasea.setBounds(315, 11, 190, 29);
+		panel.add(lblContrasea);
+		lblContrasea.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 21));
+
+		txtContrasena = new JPasswordField();
+		txtContrasena.setBounds(315, 35, 215, 23);
+		panel.add(txtContrasena);
 
 		JLabel lblNomatricula = new JLabel("NoMatricula");
-		lblNomatricula.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 16));
-		lblNomatricula.setBounds(320, 68, 123, 29);
-		frmRegistroDeAdmin.getContentPane().add(lblNomatricula);
+		lblNomatricula.setBounds(315, 69, 178, 29);
+		panel.add(lblNomatricula);
+		lblNomatricula.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 21));
 
 		txtNoMatricula = new JTextField();
+		txtNoMatricula.setFont(new Font("Century Schoolbook", Font.BOLD, 21));
+		txtNoMatricula.setBounds(315, 94, 215, 23);
+		panel.add(txtNoMatricula);
 		txtNoMatricula.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -156,10 +179,10 @@ public class RegistrarAdmin {
 
 		});
 		txtNoMatricula.setColumns(10);
-		txtNoMatricula.setBounds(311, 108, 215, 23);
-		frmRegistroDeAdmin.getContentPane().add(txtNoMatricula);
 
 		JButton btnNewButton = new JButton("Registrar");
+		btnNewButton.setBounds(315, 136, 161, 29);
+		panel.add(btnNewButton);
 		btnNewButton.addActionListener(new ActionListener() {
 			@SuppressWarnings("unlikely-arg-type")
 			public void actionPerformed(ActionEvent e) {
@@ -180,32 +203,20 @@ public class RegistrarAdmin {
 		});
 		btnNewButton.setFont(new Font("Calisto MT", Font.BOLD | Font.ITALIC, 16));
 		btnNewButton.setBackground(Color.ORANGE);
-		btnNewButton.setBounds(320, 168, 161, 29);
-		frmRegistroDeAdmin.getContentPane().add(btnNewButton);
-		
+
 		JButton btnCerrar = new JButton("Cerrar");
+		btnCerrar.setBounds(315, 169, 161, 29);
+		panel.add(btnCerrar);
 		btnCerrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				PantallaInicio pi = new PantallaInicio();
 				frmRegistroDeAdmin.setVisible(false);
 				pi.frmInicio.setVisible(true);
-				
+
 			}
 		});
 		btnCerrar.setFont(new Font("Calisto MT", Font.BOLD | Font.ITALIC, 16));
 		btnCerrar.setBackground(Color.CYAN);
-		btnCerrar.setBounds(320, 208, 161, 29);
-		frmRegistroDeAdmin.getContentPane().add(btnCerrar);
-
-		JLabel lblCodigoDeAcceso = new JLabel("Codigo de acceso");
-		lblCodigoDeAcceso.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 16));
-		lblCodigoDeAcceso.setBounds(51, 152, 190, 29);
-		frmRegistroDeAdmin.getContentPane().add(lblCodigoDeAcceso);
-
-		txtCodigoAcceso = new JTextField();
-		txtCodigoAcceso.setColumns(10);
-		txtCodigoAcceso.setBounds(51, 192, 215, 23);
-		frmRegistroDeAdmin.getContentPane().add(txtCodigoAcceso);
 	}
 
 	conection conec = new conection();
@@ -227,5 +238,4 @@ public class RegistrarAdmin {
 
 		return registrado;
 	}
-
 }

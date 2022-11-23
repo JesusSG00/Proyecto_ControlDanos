@@ -20,6 +20,13 @@ import javax.swing.border.MatteBorder;
 import javax.swing.JButton;
 import javax.swing.JTabbedPane;
 import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.border.BevelBorder;
+import javax.swing.UIManager;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class VistAdm {
 	private static String ID;
@@ -30,6 +37,8 @@ public class VistAdm {
 	private static String Fecha;
 	private static String Estatus;
 	private static String Luga;
+	private String [][] matriz = {};
+	private String [] vector= {"ID","Nombre","Cantidad","Usuario","Descripcion","Fecha","Estatus","Lugar"};
 
 	public static String getID() {
 		return ID;
@@ -103,16 +112,13 @@ public class VistAdm {
 		this.frame = frame;
 	}
 
-	public JTable getTable() {
-		return table;
-	}
+	
 
-	public void setTable(JTable table) {
-		this.table = table;
-	}
-
-	private JFrame frame;
+	public JFrame frame;
+	
 	private JTable table;
+	private JButton btnSoli;
+	private JButton btnBorrarTod;
 
 	/**
 	 * Launch the application.
@@ -141,32 +147,99 @@ public class VistAdm {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-
+		PreparedStatement st;
+		ResultSet rs;
+		String sql = "select * from dano where estatus = 'Pendiente'";
 		conection cn = new conection();
+		String [] dato = new String [8];
+		
 		frame = new JFrame();
-		frame.setBounds(100, 100, 764, 570);
+		frame.setResizable(false);
+		frame.setBounds(100, 100, 1335, 912);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setBounds(612, 33, 89, 23);
-		frame.getContentPane().add(btnNewButton);
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 204, 153));
+		panel.setBounds(0, 0, 1319, 873);
+		frame.getContentPane().add(panel);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setBounds(627, 210, 89, 23);
-		frame.getContentPane().add(btnNewButton_1);
 		
-		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(10, 11, 548, 509);
-		frame.getContentPane().add(tabbedPane);
 		
-		JLayeredPane layeredPane = new JLayeredPane();
-		tabbedPane.addTab("Registros", null, layeredPane, null);
+		table = new JTable();
+		table.setSurrendersFocusOnKeystroke(true);
+		table.setBounds(443, 5, 0, 0);
+		panel.add(table);
 		
-		JLayeredPane layeredPane_1 = new JLayeredPane();
-		tabbedPane.addTab("New tab", null, layeredPane_1, null);
-		cn.ad();
+		DefaultTableModel modelo = new DefaultTableModel();
+		modelo.addColumn("ID");
+		modelo.addColumn("Nombre");
+		modelo.addColumn("Cantidad");
+		modelo.addColumn("Usuario");
+		modelo.addColumn("Descripcion");
+		modelo.addColumn("Fecha");
+		modelo.addColumn("Estatus");
+		modelo.addColumn("Lugar");
 		
+		table.setModel(modelo);
+		
+		btnSoli = new JButton("Aprobar Solicitud");
+		btnSoli.setBackground(new Color(204, 255, 153));
+		btnSoli.setFont(new Font("Century Schoolbook", Font.BOLD, 17));
+		btnSoli.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				aceptacion ac = new aceptacion();
+				ac.frame.setVisible(true);
+				
+			}
+		});
+		panel.add(btnSoli);
+		
+		btnBorrarTod = new JButton("Borrar todas las solicitudes");
+		btnBorrarTod.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				borrado();
+			}
+		});
+		btnBorrarTod.setFont(new Font("Century Schoolbook", Font.BOLD, 17));
+		btnBorrarTod.setBackground(new Color(204, 255, 153));
+		panel.add(btnBorrarTod);
+		
+		Connection Conexion = cn.conectar();
+		
+		try {
+			st = Conexion.prepareStatement(sql);
+			
+			rs = st.executeQuery();
+			
+			while(rs.next()) {
+				dato[0] = rs.getString(1);
+				dato[1] = rs.getString(2);
+				dato[2] = rs.getString(3);
+				dato[3] = rs.getString(4);
+				dato[4] = rs.getString(5);
+				dato[5] = rs.getString(6);
+				dato[6] = rs.getString(7);
+				dato[7] = rs.getString(8);
+				modelo.addRow(dato);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
+	conection cn = new conection();
+	public boolean borrado() {
+		boolean br = false;
+		br = cn.borrar();
+		if (br==true) {
+			JOptionPane.showMessageDialog(null, "Todos las solicitudes aceptadas se han eliminado");
+		}else {
+			JOptionPane.showMessageDialog(null, "No se a podido borrar las solicitudes aceptadas");
+		}
+		return br;
+	}
+	
 }

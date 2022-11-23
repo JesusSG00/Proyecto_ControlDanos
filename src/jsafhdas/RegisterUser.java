@@ -94,42 +94,42 @@ public class RegisterUser {
 		frmRegistroDeUsuario = new JFrame();
 		frmRegistroDeUsuario.setAlwaysOnTop(true);
 		frmRegistroDeUsuario.setTitle("Registro de Usuario");
-		frmRegistroDeUsuario.setBounds(100, 100, 386, 245);
+		frmRegistroDeUsuario.setBounds(100, 100, 512, 303);
 		frmRegistroDeUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmRegistroDeUsuario.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(216, 191, 216));
-		panel.setBounds(0, 0, 382, 464);
+		panel.setBounds(0, 0, 503, 273);
 		frmRegistroDeUsuario.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Usuario");
 		lblNewLabel.setBounds(10, 31, 121, 20);
-		lblNewLabel.setFont(new Font("Century Schoolbook", Font.BOLD, 16));
+		lblNewLabel.setFont(new Font("Century Schoolbook", Font.BOLD, 21));
 		panel.add(lblNewLabel);
 		
 		JLabel lblContrasea = new JLabel("Contrase\u00F1a");
-		lblContrasea.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 16));
-		lblContrasea.setBounds(10, 95, 123, 29);
+		lblContrasea.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 21));
+		lblContrasea.setBounds(10, 95, 139, 29);
 		panel.add(lblContrasea);
 		
 		txtUsuario = new JTextField();
 		txtUsuario.setFont(new Font("Century Schoolbook", Font.BOLD, 15));
 		txtUsuario.setBackground(new Color(250, 235, 215));
 		txtUsuario.setColumns(10);
-		txtUsuario.setBounds(98, 29, 249, 29);
+		txtUsuario.setBounds(168, 29, 198, 29);
 		panel.add(txtUsuario);
 		
 		txtContrase = new JPasswordField();
 		txtContrase.setBackground(new Color(250, 235, 215));
-		txtContrase.setBounds(120, 97, 227, 29);
+		txtContrase.setBounds(168, 99, 198, 29);
 		panel.add(txtContrase);
 		
 		JButton btnNewButton = new JButton("Registrar");
 		btnNewButton.setFont(new Font("Calisto MT", Font.BOLD | Font.ITALIC, 16));
 		btnNewButton.setBackground(Color.ORANGE);
-		btnNewButton.setBounds(20, 164, 123, 29);
+		btnNewButton.setBounds(55, 164, 123, 29);
 		panel.add(btnNewButton);
 		
 		JButton btnCerrar = new JButton("Cerrar");
@@ -142,7 +142,7 @@ public class RegisterUser {
 		});
 		btnCerrar.setFont(new Font("Calisto MT", Font.BOLD | Font.ITALIC, 16));
 		btnCerrar.setBackground(Color.MAGENTA);
-		btnCerrar.setBounds(168, 164, 123, 29);
+		btnCerrar.setBounds(243, 164, 123, 29);
 		panel.add(btnCerrar);
 
 	}

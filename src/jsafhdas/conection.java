@@ -68,6 +68,28 @@ public class conection {
 		return enco;
 	}
 	
+	
+	public boolean logad(String usuario, String contrasena) {
+		boolean enco = false;
+		String sql = "select * from admin where nombre=? and contrasena=?";
+		try {
+			ps = conectar().prepareStatement(sql);
+			ps.setString(1, PantallaInicio.getAdmin());
+			ps.setString(2, PantallaInicio.getContradmin());
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				enco = true;
+				
+			}
+			conectar().close();
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
+		}
+
+		return enco;
+	}
+	
 
 	public boolean registrarAdministrador(RegistrarAdmin registrarAdmin) {
 		String sql = "insert into admin (nombre,contrasena,correo,noMatricula) values (?,?,?,?) ";
@@ -120,7 +142,7 @@ public class conection {
 	}
 
 	
-	public boolean ad() {
+	public boolean ad(VistAdm va) {
 		boolean ad = false;
 
 		String sql = "select * from dano";
@@ -148,5 +170,64 @@ public class conection {
 
 		return ad;
 	}
+	
+	public boolean ac(aceptacion ac) {
+		boolean ok = false;
+		int a;
+		String sql ="UPDATE dano SET Estatus = 'Aceptado' where id=?";
+		
+		try {
+			ps = conectar().prepareStatement(sql);
+			ps.setString(1, aceptacion.getID());
+			a = ps.executeUpdate();
+			if (a>0) {
+				ok=true;
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+		}
+		
+		return ok;
+	}
+	
+	public boolean actodo() {
+		boolean ok = false;
+		int a;
+		String sql ="UPDATE dano SET Estatus = 'Aceptado'";
+		
+		try {
+			ps = conectar().prepareStatement(sql);
+		
+			a = ps.executeUpdate();
+			if (a>0) {
+				ok=true;
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+		}
+		
+		return ok;
+	}
+	
+	public boolean borrar() {
+		boolean ok = false;
+		int a;
+		String sql ="DELETE FROM dano where Estatus = 'Aceptado'";
+		
+		try {
+			ps = conectar().prepareStatement(sql);
+		
+			a = ps.executeUpdate();
+			if (a>0) {
+				ok=true;
+			}
+		} catch (SQLException e) {
+			JOptionPane.showMessageDialog(null, "Error: "+e.getMessage());
+		}
+		
+		return ok;
+	}
+
+
 
 }

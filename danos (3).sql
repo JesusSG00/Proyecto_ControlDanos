@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-11-2022 a las 02:24:03
+-- Tiempo de generación: 23-11-2022 a las 02:11:24
 -- Versión del servidor: 10.4.21-MariaDB
 -- Versión de PHP: 8.0.10
 
@@ -59,14 +59,6 @@ CREATE TABLE `dano` (
   `Estatus` varchar(9) NOT NULL,
   `lugar` varchar(90) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `dano`
---
-
-INSERT INTO `dano` (`ID`, `Nombre`, `Cantidad`, `Usuario`, `Descripcion`, `Fecha`, `Estatus`, `lugar`) VALUES
-(1, 'Sillas', 30, 'sa', 'F', '2022-11-06 19:00:05', 'Pendiente', 'ED1'),
-(2, 'Mesas', 30, 'sa', 'F2xd', '2022-11-06 20:59:28', 'Pendiente', 'ED2');
 
 -- --------------------------------------------------------
 
@@ -125,7 +117,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT de la tabla `dano`
 --
 ALTER TABLE `dano`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`

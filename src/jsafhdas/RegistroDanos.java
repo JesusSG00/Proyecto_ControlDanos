@@ -12,6 +12,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import javax.swing.JPanel;
+import java.awt.Color;
 
 public class RegistroDanos {
 	private static String nombreMo;
@@ -143,42 +145,62 @@ public class RegistroDanos {
 	private void initialize() {
 		frmRegistroDeDanos = new JFrame();
 		frmRegistroDeDanos.setTitle("RegistroDeDanos");
-		frmRegistroDeDanos.setBounds(100, 100, 772, 483);
+		frmRegistroDeDanos.setBounds(100, 100, 797, 388);
 		frmRegistroDeDanos.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmRegistroDeDanos.getContentPane().setLayout(null);
 
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(204, 204, 255));
+		panel.setBounds(0, 0, 787, 356);
+		frmRegistroDeDanos.getContentPane().add(panel);
+		panel.setLayout(null);
+
 		JLabel lblNombreDelMobiliario = new JLabel("Nombre del mobiliario");
-		lblNombreDelMobiliario.setBounds(45, 11, 192, 29);
+		lblNombreDelMobiliario.setBounds(10, 11, 192, 29);
+		panel.add(lblNombreDelMobiliario);
 		lblNombreDelMobiliario.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 16));
-		frmRegistroDeDanos.getContentPane().add(lblNombreDelMobiliario);
-
-		JLabel lblCantidadSolicitada = new JLabel("Cantidad de objetos solicitados");
-		lblCantidadSolicitada.setBounds(330, 11, 265, 29);
-		lblCantidadSolicitada.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 16));
-		frmRegistroDeDanos.getContentPane().add(lblCantidadSolicitada);
-
-		JLabel lblDescripcionDelPorque = new JLabel("Descripcion del porque se da\u00F1o el mobiliario");
-		lblDescripcionDelPorque.setBounds(32, 166, 372, 34);
-		lblDescripcionDelPorque.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 16));
-		frmRegistroDeDanos.getContentPane().add(lblDescripcionDelPorque);
-
-		txtDescrip = new JTextField();
-		txtDescrip.setBounds(32, 211, 497, 128);
-		frmRegistroDeDanos.getContentPane().add(txtDescrip);
-		txtDescrip.setColumns(10);
-
-		txtCantidad = new JTextField();
-		txtCantidad.setBounds(330, 37, 265, 34);
-		txtCantidad.setColumns(10);
-		frmRegistroDeDanos.getContentPane().add(txtCantidad);
 
 		txtNombreMo = new JTextField();
+		txtNombreMo.setBackground(new Color(255, 255, 255));
+		txtNombreMo.setBounds(10, 37, 245, 34);
+		panel.add(txtNombreMo);
 		txtNombreMo.setToolTipText("");
-		txtNombreMo.setBounds(32, 37, 245, 34);
 		txtNombreMo.setColumns(10);
-		frmRegistroDeDanos.getContentPane().add(txtNombreMo);
+
+		JLabel lblLugar = new JLabel("Lugar donde se solicita");
+		lblLugar.setBounds(10, 82, 265, 29);
+		panel.add(lblLugar);
+		lblLugar.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 16));
+
+		txtLugar = new JTextField();
+		txtLugar.setBounds(10, 115, 326, 34);
+		panel.add(txtLugar);
+		txtLugar.setColumns(10);
+
+		JLabel lblDescripcionDelPorque = new JLabel("Descripci\u00F3n");
+		lblDescripcionDelPorque.setBounds(10, 160, 372, 34);
+		panel.add(lblDescripcionDelPorque);
+		lblDescripcionDelPorque.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 16));
+
+		txtDescrip = new JTextField();
+		txtDescrip.setBounds(10, 205, 497, 128);
+		panel.add(txtDescrip);
+		txtDescrip.setColumns(10);
+
+		JLabel lblCantidadSolicitada = new JLabel("Cantidad de objetos solicitados");
+		lblCantidadSolicitada.setBounds(409, 11, 265, 29);
+		panel.add(lblCantidadSolicitada);
+		lblCantidadSolicitada.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 16));
+
+		txtCantidad = new JTextField();
+		txtCantidad.setBounds(409, 37, 265, 34);
+		panel.add(txtCantidad);
+		txtCantidad.setColumns(10);
 
 		JButton btnAgregarReporte = new JButton("Agregar reporte");
+		btnAgregarReporte.setBackground(new Color(0, 204, 51));
+		btnAgregarReporte.setBounds(547, 205, 172, 34);
+		panel.add(btnAgregarReporte);
 		btnAgregarReporte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (!txtCantidad.getText().isEmpty() && !txtDescrip.getText().isEmpty()
@@ -190,21 +212,23 @@ public class RegistroDanos {
 
 			}
 		});
-		btnAgregarReporte.setBounds(539, 211, 172, 34);
 		btnAgregarReporte.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 16));
-		frmRegistroDeDanos.getContentPane().add(btnAgregarReporte);
 
 		JButton btnLimpiar = new JButton("Limpiar");
+		btnLimpiar.setBackground(new Color(102, 255, 204));
+		btnLimpiar.setBounds(547, 250, 172, 34);
+		panel.add(btnLimpiar);
 		btnLimpiar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				limpiar();
 			}
 		});
 		btnLimpiar.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 16));
-		btnLimpiar.setBounds(539, 256, 172, 34);
-		frmRegistroDeDanos.getContentPane().add(btnLimpiar);
 
 		JButton btnCerrarSesion = new JButton("Cerrar Sesion");
+		btnCerrarSesion.setBackground(new Color(255, 51, 51));
+		btnCerrarSesion.setBounds(547, 295, 172, 34);
+		panel.add(btnCerrarSesion);
 		btnCerrarSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				PantallaInicio pi = new PantallaInicio();
@@ -212,21 +236,8 @@ public class RegistroDanos {
 				pi.getFrmInicio().setVisible(true);
 			}
 		});
-		
-		
+
 		btnCerrarSesion.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 16));
-		btnCerrarSesion.setBounds(539, 305, 172, 34);
-		frmRegistroDeDanos.getContentPane().add(btnCerrarSesion);
-
-		JLabel lblLugar = new JLabel("Lugar donde se solicita");
-		lblLugar.setFont(new Font("Century Schoolbook", Font.BOLD | Font.ITALIC, 16));
-		lblLugar.setBounds(87, 82, 265, 29);
-		frmRegistroDeDanos.getContentPane().add(lblLugar);
-
-		txtLugar = new JTextField();
-		txtLugar.setColumns(10);
-		txtLugar.setBounds(26, 121, 326, 34);
-		frmRegistroDeDanos.getContentPane().add(txtLugar);
 
 	}
 
@@ -243,7 +254,6 @@ public class RegistroDanos {
 
 	public boolean guardar() {
 		boolean guardado = false;
-		
 
 		setNombreMo(txtNombreMo.getText());
 		setCantidad(txtCantidad.getText());
@@ -258,6 +268,5 @@ public class RegistroDanos {
 		return guardado;
 
 	}
-	
-	
+
 }
